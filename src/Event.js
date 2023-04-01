@@ -11,7 +11,7 @@ class Event extends Component {
   render() {
     return (
       <>
-        <h2 className="event-title"></h2>
+        <h2 className="event-title">Summary</h2>
         <ul className="event-time-loc"></ul>
         <button
           className="show-details"
