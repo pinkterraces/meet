@@ -9,20 +9,24 @@ class NumberOfEvents extends Component {
   handleInputChanged = (event) => {
     const value = 8;
     this.setState({
-      eventCount: value
+      eventCount: /* event.eventCount */ value
     });
   };
 
 
   render() {
+    const { eventCount } = this.state;
     return (
       <div className='number-of-events'>
-        <input
-          className='number-of-events-field'
-          value={this.state.eventCount}
-          onChange={this.handleInputChanged}
-        >
-        </input>
+        <label>Show 
+          <input
+            type='number'
+            className='number-of-events-field'
+            value={eventCount}
+            onChange={this.handleInputChanged}
+          >
+          </input>events per page.
+        </label>
       </div>
     );
   }

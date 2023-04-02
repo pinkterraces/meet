@@ -9,14 +9,18 @@ class Event extends Component {
   }
 
   render() {
+    const { event } = this.props;
     return (
       <>
-        <h2 className="event-title">Summary</h2>
-        <ul className="event-time-loc"></ul>
+        <h2 className="event-title">{event?.summary}</h2>
+        <div className="event-time-loc">
+          <p>{event?.start.dateTime}</p>
+          <p>{event?.location}</p>
+        </div>
         <button
           className="show-details"
           onClick={() => this.handleDetailsClicked()}
-        ></button>
+        >Show Details</button>
       </>
 
     )

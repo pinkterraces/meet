@@ -6,6 +6,7 @@ import './App.css';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
 import NumberOfEvents from './NumberOfEvents';
+import './nprogress.css';
 
 class App extends Component {
 

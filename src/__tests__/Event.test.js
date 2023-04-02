@@ -5,13 +5,20 @@ import Event from '../Event';
 import { mockData } from '../mock-data';
 
 describe('<Event /> component', () => {
-  let EventWrapper;
+  let EventWrapper, events;
   beforeAll(() => {
-    EventWrapper = shallow(<Event events={mockData} />);
+    EventWrapper = shallow(<Event  />);
+    events = mockData
   });
   test('render title of event', () => {
     expect(EventWrapper.find('.event-title')).toHaveLength(1);
   });
+/*   test('<Event /> summary (h2) is rendered correctly', () => {
+    const summary = EventWrapper.find('h2.event-title');
+    const summaryString = events.summary;
+    expect(summary).toBeDefined();
+    expect(summary.text()).toBe(summaryString);
+  }); */
   test('render time and location details of event', () => {
     expect(EventWrapper.find('.event-time-loc')).toHaveLength(1);
   });
