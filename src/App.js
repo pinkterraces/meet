@@ -39,6 +39,8 @@ class App extends Component {
     });
   }
 
+  //update number of events to do function here that passes number of events to the NumberOfEvents
+
   render() {
     return (
       <div className="App">

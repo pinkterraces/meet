@@ -61,4 +61,41 @@ describe('<App /> integration', () => {
     expect(AppWrapper.state('events')).toEqual(allEvents);
     AppWrapper.unmount();
   });
-});
+
+
+  test('number of events retrieved matches the number eventsCount in NumberOfEvents', async () => {
+    const AppWrapper = mount(<App />);
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents)
+   
+    const allEvents = await getEvents();
+    AppWrapper.setState({ events: allEvents})
+    const eventsCount = NumberOfEventsWrapper.state('eventsCount');
+    
+    const EventListWrapper = AppWrapper.find(EventList);
+    const eventListCount = EventListWrapper.find('.EventList li');
+    
+    //const numberOfResults = eventsCount;
+    //const eventsToShow = allEvents.slice(0, eventsCount);
+    expect(eventsCount).toBe(allEvents.length); 
+    expect(eventsCount).toBe(eventListCount.length); 
+    AppWrapper.unmount();
+  });
+
+/*   test('number of events in list changes when user changes NumberOfEvents field', () => {
+    const AppWrapper = mount(<App />);
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    expect(NumberOfEventsWrapper.state("eventsCount")).toBe(4);
+    NumberOfEventsWrapper.setState({ eventsCount:  });
+    NumberOfEventsWrapper.find(".city").simulate("change", {
+      target: { value: "Berlin" },
+    });
+    const query = NumberOfEventsWrapper.state("query");
+    const filteredLocations = locations.filter((location) => {
+      return location.toUpperCase().indexOf(query.toUpperCase()) > -1;
+    });
+    expect(NumberOfEventsWrapper.state("suggestions")).toEqual(filteredLocations);
+    AppWrapper.unmount();
+  }); */
+
+
+}); 

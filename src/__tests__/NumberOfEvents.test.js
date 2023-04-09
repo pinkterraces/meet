@@ -17,16 +17,16 @@ describe('<NumberOfEvents /> component', () => {
     expect(NumberOfEventsWrapper.find('.number-of-events-field')).toHaveLength(1);
   });
   test('renders text input correctly', () => {
-    const eventCount = NumberOfEventsWrapper.state('eventCount');
-    expect(NumberOfEventsWrapper.find('.number-of-events-field').prop('value')).toBe(~~eventCount);
+    const eventsCount = NumberOfEventsWrapper.state('eventsCount');
+    expect(NumberOfEventsWrapper.find('.number-of-events-field').prop('value')).toBe(~~eventsCount);
   });
-  test('change state when input changes', () => {
-/*     NumberOfEventsWrapper.setState({
-      eventCount: 32
-    }); */
-    const eventObject = { target: { eventCount: 8 } };
-    NumberOfEventsWrapper.find('.number-of-events-field').simulate('change', eventObject);
-    expect(NumberOfEventsWrapper.state('eventCount')).toBe(8);
-  });
-});
+  test('input is changed and the value is reflected correctly', () => {
+    const eventsCount = NumberOfEventsWrapper.state('eventsCount');
+    expect(NumberOfEventsWrapper.state('eventsCount')).toBe(eventsCount);
+    NumberOfEventsWrapper.find('.number-of-events-field').simulate('change', { target: { value: 3 } });
+    const newEventsCount = NumberOfEventsWrapper.state('eventsCount');
+    expect(NumberOfEventsWrapper.state('eventsCount')).toBe(newEventsCount);
+  })
+
+}); 
 
