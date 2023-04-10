@@ -25,28 +25,57 @@ class App extends Component {
 
   state = {
     events: [],
-    locations: []
-  }
+    locations: [],
+    seletedLocation: "all",
+    eventsCount: 4
+  };
 
-  updateEvents = (location) => {
-    getEvents().then((events) => {
-      const locationEvents = (location === 'all') ?
-        events :
-        events.filter((event) => event.location === location);
-      this.setState({
-        events: locationEvents
+  updateEvents = (location, inputNumber) => {
+    const { eventsCount, seletedLocation } = this.state;
+    if (location) {
+      getEvents().then((events) => {
+        const locationEvents =
+          location === "all"
+            ? events
+            : events.filter((event) => event.location === location);
+        const eventsToShow = locationEvents.slice(0, eventsCount);
+        this.setState({
+          events: eventsToShow,
+          seletedLocation: location,
+        });
       });
-    });
-  }
+    } else {
+      getEvents().then((events) => {
+        const locationEvents =
+          seletedLocation === "all"
+            ? events
+            : events.filter((event) => event.location === seletedLocation);
+        const eventsToShow = locationEvents.slice(0, inputNumber);
+        this.setState({
+          events: eventsToShow,
+          eventCount: inputNumber,
+        });
+      });
+    }
+  };
 
-  //update number of events to do function here that passes number of events to the NumberOfEvents
 
   render() {
+    const { locations, eventsCount, events } = this.state;
     return (
       <div className="App">
-        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents />
-        <EventList events={this.state.events} />
+
+
+
+        <CitySearch
+          locations={locations}
+          updateEvents={this.updateEvents}
+        />
+        <NumberOfEvents
+          eventsCount={eventsCount}
+          updateEvents={this.updateEvents}
+        />
+        <EventList events={events} />
       </div>
     );
   }

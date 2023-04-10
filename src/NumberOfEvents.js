@@ -6,11 +6,11 @@ class NumberOfEvents extends Component {
     eventsCount: 4
   }
 
-  handleInputChanged(value) {
-    this.setState({
-      eventsCount: /* event.eventCount */ value
-    });
-  };
+  handleInputChanged = (event, props) => {
+    let inputValue = event.target.value;
+    this.props.updateEvents(null, inputValue);
+    this.setState({ eventsCount: inputValue });
+  }
 
 
   render() {
@@ -23,7 +23,7 @@ class NumberOfEvents extends Component {
             className='number-of-events-field'
             value={eventsCount}
             onChange={event => {
-              this.handleInputChanged(event.target.value);
+              this.handleInputChanged(event);
             }}
           >
           </input>events per page.
