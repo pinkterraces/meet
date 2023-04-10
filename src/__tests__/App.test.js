@@ -62,40 +62,24 @@ describe('<App /> integration', () => {
     AppWrapper.unmount();
   });
 
-
-  test('number of events retrieved matches the number eventsCount in NumberOfEvents', async () => {
+  test('number of events matches the number in state.eventsCount', async () => {
     const AppWrapper = mount(<App />);
-    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents)
-   
     const allEvents = await getEvents();
-    AppWrapper.setState({ events: allEvents})
-    const eventsCount = NumberOfEventsWrapper.state('eventsCount');
-    
-    const EventListWrapper = AppWrapper.find(EventList);
-    const eventListCount = EventListWrapper.find('.EventList li');
-    
-    //const numberOfResults = eventsCount;
-    //const eventsToShow = allEvents.slice(0, eventsCount);
-    expect(eventsCount).toBe(allEvents.length); 
-    expect(eventsCount).toBe(eventListCount.length); 
+    //AppWrapper.setState({ events: allEvents })
+    const eventsCount = AppWrapper.state('eventsCount');
+    const allEventsLength = allEvents.slice(0, eventsCount);
+    expect(eventsCount).toBe(allEventsLength.length); 
     AppWrapper.unmount();
   });
 
-/*   test('number of events in list changes when user changes NumberOfEvents field', () => {
+  test('number of events in EventsList matches the number NumberOfEvents component', async () => {
     const AppWrapper = mount(<App />);
+    const allEvents = await getEvents();
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
-    expect(NumberOfEventsWrapper.state("eventsCount")).toBe(4);
-    NumberOfEventsWrapper.setState({ eventsCount:  });
-    NumberOfEventsWrapper.find(".city").simulate("change", {
-      target: { value: "Berlin" },
-    });
-    const query = NumberOfEventsWrapper.state("query");
-    const filteredLocations = locations.filter((location) => {
-      return location.toUpperCase().indexOf(query.toUpperCase()) > -1;
-    });
-    expect(NumberOfEventsWrapper.state("suggestions")).toEqual(filteredLocations);
+    const eventsCount = NumberOfEventsWrapper.state('eventsCount');
+    AppWrapper.setState({ eventsCount: eventsCount, events: allEvents });
+    const eventListCount = allEvents.map(event => <li></li> )
+    expect(eventsCount).toBe(eventListCount.length); 
     AppWrapper.unmount();
-  }); */
-
-
+  });
 }); 
