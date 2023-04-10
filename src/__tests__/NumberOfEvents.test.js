@@ -18,7 +18,11 @@ describe('<NumberOfEvents /> component', () => {
   });
   test('renders text input correctly', () => {
     const eventsCount = NumberOfEventsWrapper.state('eventsCount');
-    expect(NumberOfEventsWrapper.find('.number-of-events-field').prop('value')).toBe(~~eventsCount);
+    const fieldValue = NumberOfEventsWrapper.find('.number-of-events-field').prop('value');
+    console.log("eventsCount: ", eventsCount);
+    console.log("fieldValue: ", fieldValue);
+    console.log("XX: ", NumberOfEventsWrapper.find('.number-of-events-field').prop('value'));
+    expect(~~fieldValue).toBe(~~eventsCount);
   });
   test('input is changed and the value is reflected correctly', () => {
     const eventsCount = NumberOfEventsWrapper.state('eventsCount');

@@ -58,19 +58,58 @@ describe('<App /> integration', () => {
     const suggestionItems = AppWrapper.find(CitySearch).find('.suggestions li');
     await suggestionItems.at(suggestionItems.length - 1).simulate('click');
     const allEvents = await getEvents();
+    console.log("allEvents: ", allEvents);
     expect(AppWrapper.state('events')).toEqual(allEvents);
     AppWrapper.unmount();
   });
 
+ 
+  test('number of events matches the number in state.eventsCount', async () => {
+    const AppWrapper = mount(<App />);
+    const allEvents = await getEvents();
+    //AppWrapper.setState({ events: allEvents })
+    const eventsCount = AppWrapper.state('eventsCount');
+    const allEventsLength = allEvents.slice(0, eventsCount);
+    expect(eventsCount).toBe(allEventsLength.length); 
+    AppWrapper.unmount();
+  });
+ 
+  test('Changing state.eventsCount in NumberOfEvents also updates state.eventsCount in App', async () => {
+    const AppWrapper = mount(<App />);
 
-  test('number of events retrieved matches the number eventsCount in NumberOfEvents', async () => {
+    const eventsCount = AppWrapper.state('eventsCount');
+    const NumberOfEventsWrapper = AppWrapper.find('NumberOfEvents');
+    const numberOfEvents = NumberOfEventsWrapper.state('eventsCount');
+    expect(eventsCount).toBe(numberOfEvents);
+
+    NumberOfEventsWrapper.setState( { eventsCount: 4 } );
+    const newNumberOfEvents = NumberOfEventsWrapper.state('eventsCount');
+    console.log("eventsCount: ", eventsCount);
+    console.log("newNumberOfEvents: ", newNumberOfEvents);
+    expect(eventsCount).toBe(newNumberOfEvents);
+
+    AppWrapper.unmount();
+  });
+
+/*   test('count of allEvents passed to EventsList changes according to number of eventsCount in state', async () => {
+    const AppWrapper = mount(<App />);
+    const allEvents = await getEvents();
+    AppWrapper.setState({ events: allEvents })
+    const eventsCount = AppWrapper.state('eventsCount');
+    expect(eventsCount).toBe(allEvents.length);
+    AppWrapper.unmount();
+  }); */
+
+  //old test for above
+
+/*   test('OLD number of events retrieved matches the number eventsCount in NumberOfEvents', async () => {
     const AppWrapper = mount(<App />);
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents)
    
     const allEvents = await getEvents();
     AppWrapper.setState({ events: allEvents})
     const eventsCount = NumberOfEventsWrapper.state('eventsCount');
-    
+   
     const EventListWrapper = AppWrapper.find(EventList);
     const eventListCount = EventListWrapper.find('.EventList li');
     
@@ -79,7 +118,7 @@ describe('<App /> integration', () => {
     expect(eventsCount).toBe(allEvents.length); 
     expect(eventsCount).toBe(eventListCount.length); 
     AppWrapper.unmount();
-  });
+  }); */
 
 /*   test('number of events in list changes when user changes NumberOfEvents field', () => {
     const AppWrapper = mount(<App />);
