@@ -77,8 +77,10 @@ describe('<App /> integration', () => {
     const allEvents = await getEvents();
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
     const eventsCount = NumberOfEventsWrapper.state('eventsCount');
-    const eventListCount = AppWrapper.find(EventList).find('EventList li');
     AppWrapper.setState({ eventsCount: eventsCount, events: allEvents });
+    const updatedEvents = allEvents.slice(0, eventsCount);
+    AppWrapper.setState({ events: updatedEvents });
+    const eventListCount = AppWrapper.find(EventList).find('EventList li');
     //const eventListCount = allEvents.map(event => <li></li> )
     expect(eventsCount).toBe(eventListCount.length); 
     AppWrapper.unmount();
