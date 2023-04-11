@@ -12,7 +12,7 @@ describe('<CitySearch /> component', () => {
   });
   test('render search text box', () => {
     expect(CitySearchWrapper.find('.city')).toHaveLength(1);
-  });
+  }); 
   test('renders a list of suggestions', () => {
     expect(CitySearchWrapper.find('.suggestions')).toHaveLength(1);
   });

@@ -23,13 +23,13 @@ describe('<Event /> component', () => {
     expect(EventWrapper.find('.event-time-loc')).toHaveLength(1);
   });
   test('render show details button', () => {
-    expect(EventWrapper.find('.show-details')).toHaveLength(1);
+    expect(EventWrapper.find('.show-details-btn')).toHaveLength(1);
   });
   test('all event details are shown on click', () => {
     EventWrapper.setState({
       eventDetails: false
     });
-    EventWrapper.find('.show-details').at(0).simulate('click');
+    EventWrapper.find('.show-details-btn').at(0).simulate('click');
     expect(EventWrapper.state('eventDetails')).toBe(true);
   });
 });
