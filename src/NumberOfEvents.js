@@ -25,6 +25,8 @@ class NumberOfEvents extends Component {
             onChange={event => {
               this.handleInputChanged(event);
             }}
+            min='1'
+            max='50'
           >
           </input>events per page.
         </label>
