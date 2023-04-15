@@ -36,14 +36,14 @@ class Event extends Component {
         <div className="event-time-loc">
           <p>{event?.start.dateTime}</p>
           <p>{event?.location}</p>
-          <div style={(this.state.eventDetails === true) ? {} : { display: 'none' }}>
+          <div className="eventDetails" style={(this.state.eventDetails === false) ? { display: 'none' } : {} }>
             <h3>About the event:</h3>
             <p><a href={event?.htmlLink} target="_blank" rel='noreferrer'>See event details on Google calendar</a></p>
             <p>{event?.description}</p>
           </div>
         </div>
         <button
-          className="show-details"
+          className="show-details-btn"
           onClick={() => this.handleDetailsClicked()}
         >{this.state.buttonText}</button>
       </>

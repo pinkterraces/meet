@@ -86,7 +86,7 @@ input[type="number"] {
   position: relative;
 }
 
-.show-details {
+.show-details-btn {
   position: absolute;
   right: 5px;
   bottom: 5px;

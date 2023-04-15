@@ -29,7 +29,7 @@ class App extends Component {
     events: [],
     locations: [],
     seletedLocation: "all",
-    eventsCount: 12
+    eventsCount: 16
   };
 
   updateEvents = (location, inputNumber) => {
