@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import * as atatus from 'atatus-spa';
+atatus.config('ac61bbaaf67e495482fc266e21fb5c88').install();
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 
