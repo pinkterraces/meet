@@ -11,7 +11,7 @@ describe('<NumberOfEvents /> component', () => {
   let /* locations, */ NumberOfEventsWrapper;
   beforeAll(() => {
     /* locations = extractLocations(mockData); */
-    NumberOfEventsWrapper = shallow(<NumberOfEvents /* mockEventData={mockEventData} */ />);
+    NumberOfEventsWrapper = shallow(<NumberOfEvents updateEvents={() => { }} />);
   });
   test('render NumberOfEvents field', () => {
     expect(NumberOfEventsWrapper.find('.number-of-events-field')).toHaveLength(1);
