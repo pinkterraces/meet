@@ -10,6 +10,7 @@ import NumberOfEvents from './NumberOfEvents';
 import './nprogress.css';
 import { WarningAlert } from './Alert';
 import WelcomeScreen from './WelcomeScreen';
+import EventGenre from './EventGenre';
 
 class App extends Component {
 
@@ -27,7 +28,8 @@ class App extends Component {
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
-          this.setState({ events, locations: extractLocations(events) });
+          const { eventsCount } = this.state;
+          this.setState({ events: events.slice(0, eventsCount), locations: extractLocations(events) });
         }
       });
     }
@@ -111,24 +113,26 @@ class App extends Component {
         />
 
         <h4>Events in each city</h4>
-
-        <ResponsiveContainer height={400} >
-          <ScatterChart
-            margin={{
-              top: 20, right: 20, bottom: 20, left: 20,
-            }}
-          >
-            <CartesianGrid />
-            <XAxis type="category" dataKey="city" name="City" />
-            <YAxis type="number" dataKey="number" name="Number of events" />
-            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-            <Scatter data={this.getData()} fill="#8884d8" />
-          </ScatterChart>
-        </ResponsiveContainer>
+        <div className='data-vis-wrapper'>
+          <EventGenre events={events} />
+          <ResponsiveContainer height={400} >
+            <ScatterChart
+              margin={{
+                top: 20, right: 20, bottom: 20, left: 20,
+              }}
+            >
+              <CartesianGrid />
+              <XAxis type="category" dataKey="city" name="City" />
+              <YAxis type="number" dataKey="number" name="Number of events" />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+              <Scatter data={this.getData()} fill="#8884d8" />
+            </ScatterChart>
+          </ResponsiveContainer>
+        </div>
 
         <EventList events={this.state.events} />
 
-        <EventList events={events} />
+        {/* <EventList events={events} /> */}
         <WelcomeScreen
           showWelcomeScreen={this.state.showWelcomeScreen}
           getAccessToken={() => { getAccessToken() }}
