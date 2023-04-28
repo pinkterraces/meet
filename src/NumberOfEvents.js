@@ -42,7 +42,7 @@ class NumberOfEvents extends Component {
             min='1'
             max='50'
           >
-          </input>events per page.
+          </input>events.
         </label>
       </div>
     );
